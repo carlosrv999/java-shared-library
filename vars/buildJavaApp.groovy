@@ -11,7 +11,7 @@ def call(Map pipelineParams) {
       stage('Build') {
          steps {
             // Get some code from a GitHub repository
-            git 'https://github.com/carlosrv999/java-sample.git'
+            git pipelineParams.gitrepo
 
             // Run Maven on a Unix agent.
             sh "mvn -Dmaven.test.failure.ignore=true clean package"

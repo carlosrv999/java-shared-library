@@ -50,6 +50,13 @@ def call(Map pipelineParams) {
           }
         }
       }
+      stage('Deploy to Kubernetes') {
+        steps{
+          script {
+          kubernetesDeploy(configs: 'manifests/*.yaml', dockerCredentials: [[credentialsId: 'gcr-credentials', url: 'https://gcr.io']], kubeConfig: [path: ''], kubeconfigId: 'd6a54fa5-10fe-4693-8b15-54a66cea686e', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://'])
+          }
+        }
+      }
     }
   }
 }

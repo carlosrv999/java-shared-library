@@ -2,6 +2,8 @@ def call(Map pipelineParams) {
   pipeline {
     environment {
       dockerImage = ''
+      registry = "testproject-276315/test-jenkins"
+      registryCredential = 'testproject-276315'
     }
     agent any
 
@@ -35,7 +37,16 @@ def call(Map pipelineParams) {
       stage('Building image') {
         steps{
           script {
-            docker.build "test:$BUILD_NUMBER"
+            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          }
+        }
+      }
+      stage('Send to GCR'){
+        steps{
+          script {
+            docker.withRegistry('https://gcr.io', registryCredential ) {
+              dockerImage.push()
+            }
           }
         }
       }

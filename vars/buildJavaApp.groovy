@@ -3,7 +3,7 @@ def call(Map pipelineParams) {
     environment {
       dockerImage = ''
       registry = "testproject-276315/test-jenkins"
-      registryCredential = 'testproject-276315'
+      registryCredential = 'gcr-credentials'
     }
     agent any
 

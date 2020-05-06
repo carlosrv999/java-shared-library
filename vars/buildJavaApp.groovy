@@ -1,4 +1,4 @@
-def call(Map config=[:], Closure body) {
+def call() {
     node {
         stage('Build') {
             steps {
@@ -14,6 +14,5 @@ def call(Map config=[:], Closure body) {
                 }
             }
         }
-        body()
     }
 }

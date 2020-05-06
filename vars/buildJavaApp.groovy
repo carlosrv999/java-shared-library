@@ -2,8 +2,7 @@ def call(Map config=[:], Closure body) {
     node {
         stage('Build') {
             steps {
-                git config.git
-
+                git url: "https://github.com/carlosrv999/java-sample.git"
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
             }
